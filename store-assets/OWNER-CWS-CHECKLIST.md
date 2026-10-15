@@ -1,4 +1,4 @@
-# Owner checklist — Chrome Web Store upload (MGP-W2-04)
+# Owner checklist - Chrome Web Store upload (MGP-W2-04)
 
 1. Open [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole) (one-time $5 developer fee if not paid).
 2. **New item** → upload `fairhelm-yacht-inspector-1.0.0.zip` from [GitHub Release v1.0.0](https://github.com/nareyko/yacht-inspector/releases/tag/v1.0.0) or `packages/yacht-inspector/dist/` in the monorepo.

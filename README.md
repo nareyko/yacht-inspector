@@ -1,33 +1,66 @@
 # FairHelm Yacht Inspector
 
-Chrome Manifest V3 extension for Boat24, YachtWorld, Scanboat, Blocket and DBA.
-
-Open a yacht listing → match against the FairHelm catalog (93 models) → see **unstated CapEx** items and survey checkpoints. **Zero Tracking.**
+Chrome Manifest V3 extension for Boat24, YachtWorld, Scanboat, Blocket and DBA listing pages. It matches the ad against the FairHelm catalog (93 models), flags CapEx items the ad leaves **unstated**, and loads survey checkpoints for the matched model from the public card-summary API.
 
 ## Install
 
 | Channel | Link |
 |---------|------|
-| **Sideload ZIP** | [fairhelm.com/downloads/fairhelm-yacht-inspector.zip](https://fairhelm.com/downloads/fairhelm-yacht-inspector.zip) |
-| **GitHub Release** | [Releases](https://github.com/nareyko/yacht-inspector/releases) |
-| **Chrome Web Store** | *pending review* (listing pack in `store-assets/`) |
+| Sideload ZIP | https://fairhelm.com/downloads/fairhelm-yacht-inspector.zip |
+| GitHub Release | https://github.com/nareyko/yacht-inspector/releases/tag/v1.0.0 |
+| Chrome Web Store | *owner submit* - see `store-assets/OWNER-CWS-CHECKLIST.md` |
 
-### Load unpacked
+### Load unpacked in Chrome
 
-1. Download and unzip the release asset (or clone this repo).
-2. `chrome://extensions` → Developer mode → **Load unpacked** → select this folder.
+1. Open `chrome://extensions`.
+2. Enable **Developer mode**.
+3. Click **Load unpacked**.
+4. Select this folder: `packages/yacht-inspector` (or the unzipped release).
 
-## Privacy
+There is no build step. The code is plain ESM JavaScript, and the content script loads its libraries through `chrome.runtime.getURL`.
 
-No analytics, no telemetry, no ads. Listing text stays in the page. One GET to `api.fairhelm.com` for the matched model card summary only. See [PRIVACY.md](./PRIVACY.md).
+## Privacy: Zero Tracking
 
-## Links
+- No analytics SDK, no telemetry, no advertising IDs.
+- The listing is read inside the page and stays there.
+- The only call to `api.fairhelm.com` is the `card-summary` request for a matched model.
+- Browsing history and unrelated page content are never uploaded.
 
-- CapEx scanner: https://fairhelm.com/en/yachts/tools/capex-scanner/
-- Listing review (€49): https://fairhelm.com/en/yachts/services/listing-review/
-- Formulas: https://fairhelm.com/en/yachts/formulas/
-- Telegram bot: [@FairHelmYachtBot](https://t.me/FairHelmYachtBot)
+Full text: [PRIVACY.md](./PRIVACY.md).
 
-## License
+## Host permissions
 
-MIT © FairHelm ([fairhelm.com](https://fairhelm.com))
+| Host | Purpose |
+|------|---------|
+| `*.boat24.com` | Listing content script |
+| `*.yachtworld.com` | Listing content script |
+| `*.scanboat.com` | Listing content script |
+| `*.blocket.se` | Listing content script |
+| `*.dba.dk` | Listing content script |
+| `https://api.fairhelm.com/*` | Card summary for the matched model |
+
+## API
+
+```
+GET https://api.fairhelm.com/api/public/v1/models/{brand}/{model}/card-summary
+```
+
+The background service worker sends this request after a local catalog match. Unstated CapEx flags are computed locally from the listing text. The only data in the request is the brand and model path.
+
+## Scripts
+
+```bash
+cd packages/yacht-inspector
+npm test          # node --test
+npm run smoke     # parity + DOM fixture tests
+```
+
+## Package layout
+
+- `manifest.json`: MV3 manifest
+- `data/catalog-index.json`: 93-model index
+- `src/background.js`: `FETCH_CARD_SUMMARY` handler
+- `src/content/listing.js` and `panel.css`: panel injection
+- `src/lib/*`: CapEx nodes, parsers, matcher, panel HTML
+- `fixtures/`: static HTML for tests
+- `test/`: `node:test` suites
