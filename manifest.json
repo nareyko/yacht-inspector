@@ -1,0 +1,61 @@
+{
+  "manifest_version": 3,
+  "name": "FairHelm Yacht Inspector",
+  "version": "1.0.0",
+  "description": "Open a yacht ad, see which CapEx items it leaves unstated and what a surveyor checks on that model. Zero Tracking.",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "permissions": ["activeTab", "storage"],
+  "host_permissions": [
+    "*://*.boat24.com/*",
+    "*://*.yachtworld.com/*",
+    "*://*.scanboat.com/*",
+    "*://*.blocket.se/*",
+    "*://*.dba.dk/*",
+    "https://api.fairhelm.com/*"
+  ],
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.boat24.com/*",
+        "*://*.yachtworld.com/*",
+        "*://*.scanboat.com/*",
+        "*://*.blocket.se/*",
+        "*://*.dba.dk/*"
+      ],
+      "js": ["src/content/listing.js"],
+      "css": ["src/content/panel.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "FairHelm Yacht Inspector",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "data/catalog-index.json",
+        "src/lib/*.js"
+      ],
+      "matches": [
+        "*://*.boat24.com/*",
+        "*://*.yachtworld.com/*",
+        "*://*.scanboat.com/*",
+        "*://*.blocket.se/*",
+        "*://*.dba.dk/*"
+      ]
+    }
+  ]
+}

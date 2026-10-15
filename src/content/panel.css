@@ -1,0 +1,136 @@
+/* FairHelm Yacht Inspector: compact panel, marine blue accent, no purple */
+
+#fairhelm-yacht-inspector-panel.fhyi-root {
+  --fhyi-accent: #0077b6;
+  --fhyi-ink: #0b1f2a;
+  --fhyi-muted: #5a6b75;
+  --fhyi-bg: #f7fafc;
+  --fhyi-border: #d0dde6;
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2147483646;
+  width: min(320px, calc(100vw - 24px));
+  max-height: min(70vh, 520px);
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 12px 14px 10px;
+  font: 13px/1.4 system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--fhyi-ink);
+  background: var(--fhyi-bg);
+  border: 1px solid var(--fhyi-border);
+  border-radius: 8px;
+  box-shadow: 0 8px 28px rgba(11, 31, 42, 0.14);
+}
+
+#fairhelm-yacht-inspector-panel .fhyi-header {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--fhyi-accent);
+}
+
+#fairhelm-yacht-inspector-panel .fhyi-brand {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--fhyi-accent);
+  letter-spacing: 0.02em;
+}
+
+#fairhelm-yacht-inspector-panel .fhyi-product {
+  font-size: 12px;
+  color: var(--fhyi-muted);
+  flex: 1;
+}
+
+#fairhelm-yacht-inspector-panel .fhyi-close {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--fhyi-muted);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+}
+
+#fairhelm-yacht-inspector-panel .fhyi-close:hover {
+  color: var(--fhyi-ink);
+}
+
+#fairhelm-yacht-inspector-panel .fhyi-model {
+  margin: 0 0 4px;
+  font-size: 13px;
+}
+
+#fairhelm-yacht-inspector-panel .fhyi-meta {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: var(--fhyi-muted);
+}
+
+#fairhelm-yacht-inspector-panel .fhyi-section {
+  margin: 0 0 8px;
+}
+
+#fairhelm-yacht-inspector-panel .fhyi-section h2 {
+  margin: 0 0 4px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--fhyi-accent);
+}
+
+#fairhelm-yacht-inspector-panel .fhyi-list {
+  margin: 0;
+  padding: 0 0 0 16px;
+}
+
+#fairhelm-yacht-inspector-panel .fhyi-list li {
+  margin: 0 0 3px;
+}
+
+#fairhelm-yacht-inspector-panel .fhyi-flag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #9a3412;
+  background: #ffedd5;
+  padding: 1px 5px;
+  border-radius: 3px;
+  margin-right: 4px;
+}
+
+#fairhelm-yacht-inspector-panel .fhyi-muted {
+  color: var(--fhyi-muted);
+}
+
+#fairhelm-yacht-inspector-panel .fhyi-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 8px 0 6px;
+}
+
+#fairhelm-yacht-inspector-panel .fhyi-links a {
+  color: var(--fhyi-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+#fairhelm-yacht-inspector-panel .fhyi-links a:hover {
+  color: #023e8a;
+}
+
+#fairhelm-yacht-inspector-panel .fhyi-privacy {
+  margin: 0;
+  font-size: 10px;
+  color: var(--fhyi-muted);
+}
